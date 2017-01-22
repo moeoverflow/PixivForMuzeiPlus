@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_changeInterval_entries">
+        <item>いつでも更新しない</item>
+        <item>毎分</item>
+        <item>15分</item>
+        <item>30分</item>
+        <item>1時間</item>
+        <item>3時間</item>
+        <item>6時間</item>
+        <item>毎日</item>
+        <item>3日</item>
+    </string-array>
+    <string-array name="pref_changeInterval_entryValues">
+        <!-- unit: 分钟 -->
+        <item>0</item>
+        <item>1</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>1440</item>
+        <item>4320</item>
+    </string-array>
+</resources>

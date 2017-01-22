@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_changeInterval_entries">
+        <item>Do not change wallpaper</item>
+        <item>Every minute</item>
+        <item>Every 15 minutes</item>
+        <item>Every 30 minutes</item>
+        <item>Every hour</item>
+        <item>Every 3 hour</item>
+        <item>Every 6 hour</item>
+        <item>Every Day</item>
+        <item>Every 3 Day</item>
+    </string-array>
+    <string-array name="pref_changeInterval_entryValues">
+        <!-- unit: 分钟 -->
+        <item>0</item>
+        <item>1</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>1440</item>
+        <item>4320</item>
+    </string-array>
+</resources>

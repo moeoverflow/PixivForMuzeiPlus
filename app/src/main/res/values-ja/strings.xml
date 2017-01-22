@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Pixiv for Muzei Plus</string>
+    <string name="source_description">Sourcing artworks from Pixiv for Muzei live wallpaper By Democyann</string>
+    <string name="time_default">30</string>
+
+    <string name="push_set">画像更新設定</string>
+    <string name="change_time">更新時間</string>
+    <string name="change_time_li">指定した時間に画像を更新する</string>
+    <string name="only_wifi">Wi-Fi 時のみ更新</string>
+    <string name="only_wif_li"></string>
+    <!--<string name="only_wif_li">この設定開ければWifiを使うの場合以外は画像を更新できない</string>-->
+    <string name="pixiv_user">Pixiv にログイン</string>
+    <!--この設定開ければPixivにログインして、自分好きな画像を推薦できます\n-->
+    <string name="pixiv_user_li">非ログインの場合はpixivの毎日推薦リストをダウンロード</string>
+    <string name="pixiv_login_info">Pixivにログイン設定</string>
+    <string name="set_pixiv_id">Pixiv ID</string>
+    <string name="only_pixiv_user">ログインしている時だけ設定できます</string>
+    <string name="input_pixiv_id">PixivID を入力してください</string>
+    <string name="set_pixiv_pass">パスワード</string>
+    <string name="input_pixiv_pass">Pixiv のパスワードを入力してください</string>
+    <string name="u_err">＊PixivID とパスワード設定してください＊</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="loading">Now Loading ...</string>
+    <string name="login_failed">ログイン失敗ました、Pixiv ID またはパスワードが間違っています</string>
+    <string name="r18_enable">R-18 画像を隠します</string>
+    <string name="tag_enable_li">非ログインの場合に開ければロード遅くなるで注意ください</string>
+    <string name="tag_set_li">画像の中でこれらのタグがあれば推薦しません</string>
+    <string name="tag_set_title">タグ入力してください。半角カンマを仕切ってください</string>
+    <string name="tag_enable">タグ選別してできる</string>
+    <string name="tags_set">タグ設定</string>
+</resources>
