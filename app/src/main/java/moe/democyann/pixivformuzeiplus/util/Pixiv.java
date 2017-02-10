@@ -181,7 +181,7 @@ public class Pixiv {
         return list;
     }
 
-    public JSONObject getIllInfo2(String id){
+    public JSONObject getIllInfo(String id){
         HttpUtil illust=new HttpUtil(DETA_URL+id,cookie);
         illust.checkURL();
         Map<String,String> recprer=basepre;
@@ -202,7 +202,7 @@ public class Pixiv {
         }
     }
 
-    public JSONObject getIllInfo(String id){
+    public JSONObject getIllInfo2(String id){
         Log.i(TAG, "getIllInfo: "+token);
         HttpUtil illust=new HttpUtil(ILLUST_URL+id+"&tt="+token,cookie);
         illust.checkURL();
@@ -243,6 +243,21 @@ public class Pixiv {
             return null;
         }
     }
+
+    public Uri downloadImage2(String imgurl,String workid,File file){
+
+        String ref="http://www.pixiv.net/member_illust.php?mode=medium&illust_id=" + workid;
+
+        HttpUtil download = new HttpUtil(imgurl,null);
+        download.checkURL();
+
+        if(download.downloadImg(ref,USER_AGENT,file)){
+            return Uri.parse("file://" + file.getAbsolutePath());
+        }else{
+            return null;
+        }
+    }
+
 
     public JSONArray getRalllist(){
         HttpUtil rall= new HttpUtil(RALL_URL,new Cookie());
