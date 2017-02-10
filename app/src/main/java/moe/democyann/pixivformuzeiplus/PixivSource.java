@@ -1,5 +1,6 @@
 package moe.democyann.pixivformuzeiplus;
 
+import android.annotation.TargetApi;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -22,6 +24,8 @@ import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -41,10 +45,36 @@ public class PixivSource extends RemoteMuzeiArtSource{
     private static List list=null;
     private static long last=0;
     private static JSONArray rall=null;
+    private static boolean loadflag=false;
 
     private static String pixivid="";
     private static String password="";
 
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            loadflag=true;
+            while(true) {
+                List<Artwork> loadlist = getArtlist();
+                Log.i(TAG, "run: SIZE"+loadlist.size());
+                if(loadlist.size()>=5) break;
+                try {
+                    Artwork a=pixivUserPush();
+                    if(a!=null) {
+                        loadlist.add(a);
+                    }
+                } catch (RetryException e) {
+                    Log.e(TAG, "run: get img", e);
+                    return;
+                }
+                setArtlist(loadlist);
+            }
+            loadflag=false;
+        }
+    };
+
+    private Thread t1 = new Thread(runnable);
 
     public PixivSource() {
         super(SOURCE_NAME);
@@ -109,8 +139,23 @@ public class PixivSource extends RemoteMuzeiArtSource{
             if (v) {
                 pixivid = getUserName();
                 password = getPassword();
+                List<Artwork> loadlist = getArtlist();
                 if (!"".equals(pixivid) && !"".equals(password)) {
-                    artwork=pixivUserPush();
+                    if(loadlist.size()>0) {
+                        artwork=loadlist.get(0);
+                        loadlist.remove(0);
+                        setArtlist(loadlist);
+                    }else{
+                        artwork = pixivUserPush();
+                    }
+                    Log.i(TAG, "onTryUpdate: loadflag"+loadflag);
+                    if(!loadflag) {
+                        loadflag=true;
+                        Log.i(TAG, "onTryUpdate: Thread RUN *****************************");
+                        t1=new Thread(runnable);
+                        t1.start();
+                    }
+
                 } else {
                     Log.i(TAG, "onTryUpdate: 还未设置PixivID及密码");
                     artwork =noPixivUser(getResources().getString(R.string.u_err));
@@ -119,6 +164,7 @@ public class PixivSource extends RemoteMuzeiArtSource{
                 artwork=noPixivUser("");
             }
         }catch (Exception e){
+            Log.e(TAG, "onTryUpdate: ",e );
             publishArtwork(getCurrentArtwork());
         }finally {
             if(artwork!=null) {
@@ -304,7 +350,6 @@ public class PixivSource extends RemoteMuzeiArtSource{
                     try{
                         illust=data.getJSONObject("illust");
                         views=illust.getLong("total_view");
-                        Log.i(TAG, "pixivUserPush Views: "+views);
                     } catch (JSONException e) {
                         Log.e(TAG, e.toString(),e );
                         throw new RetryException();
@@ -461,6 +506,57 @@ public class PixivSource extends RemoteMuzeiArtSource{
         boolean defaultValue = false,
                 v = preferences.getBoolean("is_tag", defaultValue);
         return v;
+    }
+
+    private List<Artwork> getArtlist(){
+        List<Artwork> loadlist= new ArrayList<Artwork>();
+        SharedPreferences preferences =PreferenceManager.getDefaultSharedPreferences(PixivSource.this);
+        String defaultValue="",
+                v=preferences.getString("load",defaultValue);
+//        Log.i(TAG, "getArtlist: "+v);
+        JSONArray array;
+        if(!"".equals(v)) {
+            try {
+                array = new JSONArray(v);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Log.e(TAG, "run: to arr", e);
+                return loadlist;
+            }
+        }else{
+            array=new JSONArray();
+        }
+
+        for(int i=0;i<array.length();i++) {
+            try {
+                JSONObject o= array.getJSONObject(i);
+                if(o!=null) {
+                    loadlist.add(Artwork.fromJson(o));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Log.e(TAG, "run: to obj", e);
+                return loadlist;
+            }
+        }
+        return loadlist;
+    }
+
+    private void setArtlist(List<Artwork> loadlist){
+        JSONArray array;
+        array= new JSONArray();
+        for(Artwork ar:loadlist){
+            try {
+                array.put(ar.toJson());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        SharedPreferences preferences =PreferenceManager.getDefaultSharedPreferences(PixivSource.this);
+        SharedPreferences.Editor editor = preferences.edit();
+//        Log.i(TAG, "setArtlist: "+array.toString());
+        editor.putString("load",array.toString());
+        editor.apply();
     }
 
 }
