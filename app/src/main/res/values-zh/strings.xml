@@ -27,4 +27,7 @@
     <string name="tag_set_li">不推送包含这些标签的作品</string>
     <string name="tag_set_title">请输入要过滤的标签，使用英文逗号分隔</string>
     <string name="tags_set">设置过滤标签</string>
+    <string name="views_set">最低浏览量(beta)</string>
+    <string name="views_set_li">只显示大于此浏览量的图片，过大可能无法加载</string>
+    <string name="views_set_title">最低浏览量</string>
 </resources>
