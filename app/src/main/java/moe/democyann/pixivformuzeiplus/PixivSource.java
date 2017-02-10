@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.Exchanger;
 
 import moe.democyann.pixivformuzeiplus.util.Cookie;
 import moe.democyann.pixivformuzeiplus.util.Pixiv;
@@ -298,11 +299,20 @@ public class PixivSource extends RemoteMuzeiArtSource{
                         flushToken();
                         return null;
                     }
+                    long views;
+
                     try{
                         illust=data.getJSONObject("illust");
+                        views=illust.getLong("total_view");
+                        Log.i(TAG, "pixivUserPush Views: "+views);
                     } catch (JSONException e) {
                         Log.e(TAG, e.toString(),e );
                         throw new RetryException();
+                    }
+                    Log.i(TAG, "pixivUserPush: get"+getViews());
+                    if(views<getViews()){
+                        Log.i(TAG, "浏览数不足，重新加载"+getViews());
+                        continue;
                     }
 
                     String tags="";
@@ -424,6 +434,18 @@ public class PixivSource extends RemoteMuzeiArtSource{
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean defaultValue = true,
                 v = preferences.getBoolean("is_no_r18", defaultValue);
+        return v;
+    }
+    private long getViews(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String defaultValue = "0",
+                s = preferences.getString("views", defaultValue);
+        long v=0;
+        try{
+            v=Long.valueOf(s);
+        }catch (Exception e){
+            Log.e(TAG, "getViews: ", e);
+        }
         return v;
     }
 

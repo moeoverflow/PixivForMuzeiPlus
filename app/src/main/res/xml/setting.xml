@@ -36,6 +36,14 @@
             android:dialogTitle="@string/tag_set_title"
             android:dependency="is_tag"
             />
+        <EditTextPreference
+            android:key="views"
+            android:inputType="number"
+            android:title="@string/views_set"
+            android:summary="@string/views_set_li"
+            android:dialogTitle="@string/views_set_title"
+            android:defaultValue="0"
+            />
 
     <CheckBoxPreference
         android:key="is_user"
@@ -60,13 +68,13 @@
         android:summary="@string/only_pixiv_user"
         android:dialogTitle="@string/input_pixiv_pass"
         android:dependency="is_user"
-        />s
+        />
     </PreferenceCategory>
     <PreferenceCategory
         android:title="About">
     <ListPreference
         android:title="Version"
-        android:summary="V1.1.2"
+        android:summary="V1.1.3_beta"
         android:enabled="false"
         android:layout_height="wrap_content" />
         <Preference
