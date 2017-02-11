@@ -55,6 +55,15 @@ public class PixivSource extends RemoteMuzeiArtSource{
         @Override
         public void run() {
             loadflag=true;
+
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                loadflag=false;
+                return;
+            }
+
             while(true) {
                 List<Artwork> loadlist = getArtlist();
                 Log.i(TAG, "run: SIZE"+loadlist.size());
@@ -62,10 +71,12 @@ public class PixivSource extends RemoteMuzeiArtSource{
                 try {
                     Artwork a=pixivUserPush();
                     if(a!=null) {
+                        loadlist=getArtlist();
                         loadlist.add(a);
                     }
                 } catch (RetryException e) {
                     Log.e(TAG, "run: get img", e);
+                    loadflag=false;
                     return;
                 }
                 setArtlist(loadlist);
@@ -142,6 +153,9 @@ public class PixivSource extends RemoteMuzeiArtSource{
                 List<Artwork> loadlist = getArtlist();
                 if (!"".equals(pixivid) && !"".equals(password)) {
                     if(loadlist.size()>0) {
+                        for(Artwork aaa:loadlist) {
+                            Log.i(TAG, "onTryUpdate: loadlist" + aaa.getTitle()+aaa.getToken());
+                        }
                         artwork=loadlist.get(0);
                         loadlist.remove(0);
                         setArtlist(loadlist);
@@ -250,7 +264,6 @@ public class PixivSource extends RemoteMuzeiArtSource{
             while(true) {
                 Random r = new Random();
                 int i = r.nextInt(rall.length());
-
                 try {
                     o = rall.getJSONObject(i);
                     user_id = o.getString("user_id");
@@ -339,6 +352,7 @@ public class PixivSource extends RemoteMuzeiArtSource{
                 while(true) {
                     Random random = new Random();
                     int i = random.nextInt(list.size());
+                    Log.i(TAG, "pixivUserPush: GET I ======= "+i);
                     String imgid = String.valueOf(list.get(i));
                     data = pixiv.getIllInfo(imgid);
                     if (data == null) {
@@ -354,7 +368,7 @@ public class PixivSource extends RemoteMuzeiArtSource{
                         Log.e(TAG, e.toString(),e );
                         throw new RetryException();
                     }
-                    Log.i(TAG, "pixivUserPush: get"+getViews());
+                    Log.i(TAG, "pixivUserPush: Views = "+views);
                     if(views<getViews()){
                         Log.i(TAG, "浏览数不足，重新加载"+getViews());
                         continue;
@@ -420,14 +434,15 @@ public class PixivSource extends RemoteMuzeiArtSource{
                     throw new RetryException();
                 }
 
-
-                File file = new File(app.getExternalCacheDir(),user_id+img_id);
+                Random r = new Random();
+                int nr = r.nextInt(1000);
+                File file = new File(app.getExternalCacheDir(),user_id+img_id+nr);
                 Uri fileUri =pixiv.downloadImage2(img_url,img_id,file);
                 Artwork artwork = new Artwork.Builder()
                         .title(illust_title)
                         .byline(user_name)
                         .imageUri(fileUri)
-                        .token(user_id+img_id)
+                        .token(user_id+img_id+nr)
                         .viewIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.pixiv.net/member_illust.php?mode=medium&illust_id=" + img_id)))
                         .build();
                 return artwork;
@@ -491,6 +506,7 @@ public class PixivSource extends RemoteMuzeiArtSource{
         }catch (Exception e){
             Log.e(TAG, "getViews: ", e);
         }
+        if(v>50000) v=50000;
         return v;
     }
 

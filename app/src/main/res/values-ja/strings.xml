@@ -31,5 +31,5 @@
     <string name="tags_set">タグ設定</string>
     <string name="views_set">閲覧数(beta)</string>
     <string name="views_set_li">閲覧数の最低限</string>
-    <string name="views_set_title">閲覧数の最低限</string>
+    <string name="views_set_title">閲覧数の最低限(0-5000)</string>
 </resources>

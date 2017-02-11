@@ -1,33 +1,34 @@
 <resources>
     <string name="app_name">Pixiv for Muzei Plus</string>
-    <string name="source_description">Muzei Pixiv 壁纸源 By Democyann</string>
+    <string name="source_description">Sourcing artworks from Pixiv for Muzei live wallpaper By Democyann</string>
     <string name="time_default">30</string>
-    <string name="push_set">推送设置</string>
-    <string name="change_time">更新时间</string>
-    <string name="change_time_li">设置更新图片的时间间隔</string>
-    <string name="only_wifi">仅 Wifi 下更新图片</string>
+
+    <string name="push_set">Push Settings</string>
+    <string name="change_time">Change Interval</string>
+    <string name="change_time_li">Configure the interval of image changings</string>
+    <string name="only_wifi">Changing image under WiFi only</string>
     <string name="only_wif_li"></string>
-    <string name="pixiv_user">使用 Pixiv 用户推荐算法(需登录)</string>
-    <string name="pixiv_user_li">如关闭则使用 Pixiv 每日精选推送</string>
-    <string name="pixiv_login_info">Pixiv 登录信息</string>
+    <string name="pixiv_user">Using Pixiv Algorithm</string>
+    <string name="pixiv_user_li">Login required.\nIf off then using Pixiv daily recommendations</string>
+    <string name="pixiv_login_info">Pixiv Login</string>
     <string name="set_pixiv_id">Pixiv ID</string>
-    <string name="only_pixiv_user">该项仅在使用 Pixiv 用户推荐算法时有效</string>
-    <string name="input_pixiv_id">输入你的 PixivID</string>
-    <string name="set_pixiv_pass">Pixiv 密码</string>
-    <string name="input_pixiv_pass">输入你的 Pixiv 密码</string>
-    <string name="u_err">还未设置 PixivID 及密码，正在使用每日推荐</string>
-    <string name="r18_enable">不显示 R-18 图片</string>
-    <string name="tag_enable">开启标签过滤</string>
-    <string name="tag_enable_li">不建议非登录用户开启，可能会大幅增加推送时间</string>
-    <string name="tags_set">设置过滤标签</string>
-    <string name="tag_set_li">不推送包含这些标签的作品</string>
-    <string name="tag_set_title">请输入要过滤的标签，使用英文逗号分隔</string>
-    <string name="views_set">最低浏览量(beta)</string>
-    <string name="views_set_li">只显示大于此浏览量的图片，过大可能无法加载</string>
-    <string name="views_set_title">最低浏览量</string>
+    <string name="only_pixiv_user">Available only when using Pixiv user algorithm</string>
+    <string name="input_pixiv_id">Input Your PixivID</string>
+    <string name="set_pixiv_pass">Password</string>
+    <string name="input_pixiv_pass">Inpur Your Pixiv Password</string>
+    <string name="u_err">** Please Set Up Pixiv ID and Password **</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="loading">加载中……</string>
-    <string name="login_failed">登录失败，请检查 Pixiv ID 和密码</string>
+    <string name="loading">Now Loading ...</string>
+    <string name="login_failed">Login failed.Please check Pixiv ID and password.</string>
+    <string name="r18_enable">Don\'t Push R18 Image</string>
+    <string name="tag_enable">Enable Tag Filter</string>
+    <string name="tag_enable_li">Unrecommended for user not logged in, may substantially increase pushing time</string>
+    <string name="tag_set_li">Don\'t push works with these tags</string>
+    <string name="tags_set">Set Tag Filters</string>
+    <string name="tag_set_title">Enter the tags, separated by commas</string>
+    <string name="views_set">Views(beta)</string>
+    <string name="views_set_li">Set min views</string>
+    <string name="views_set_title">min views(0-50000)</string>
 </resources>

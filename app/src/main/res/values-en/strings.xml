@@ -30,5 +30,5 @@
     <string name="tag_set_title">Enter the tags, separated by commas</string>
     <string name="views_set">Views(beta)</string>
     <string name="views_set_li">Set min views</string>
-    <string name="views_set_title">min views</string>
+    <string name="views_set_title">min views(0-50000)</string>
 </resources>
