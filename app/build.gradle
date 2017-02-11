@@ -7,8 +7,8 @@ android {
         applicationId "moe.democyann.pixivformuzeiplus"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 4
-        versionName "1.1.5_beta"
+        versionCode 5
+        versionName "1.1.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
