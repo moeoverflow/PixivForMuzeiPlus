@@ -74,15 +74,15 @@
         android:title="About">
     <ListPreference
         android:title="Version"
-        android:summary="V1.1.6"
+        android:summary="V1.1.7"
         android:enabled="false"
         android:layout_height="wrap_content" />
         <Preference
             android:title="Author"
-            android:summary="Twitter:@democyann">
+            android:summary="Blog:democyann">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="https://twitter.com/democyann" />
+                android:data="https://democyann.moe/2017/01/343/" />
         </Preference>
     </PreferenceCategory>
 </PreferenceScreen>
