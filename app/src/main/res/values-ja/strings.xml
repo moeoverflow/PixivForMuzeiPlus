@@ -29,7 +29,7 @@
     <string name="tag_set_title">タグ入力してください。半角カンマを仕切ってください</string>
     <string name="tag_enable">タグ選別してできる</string>
     <string name="tags_set">タグ設定</string>
-    <string name="views_set">閲覧数(beta)</string>
+    <string name="views_set">閲覧数</string>
     <string name="views_set_li">閲覧数の最低限</string>
     <string name="views_set_title">閲覧数の最低限(0-5000)</string>
 </resources>

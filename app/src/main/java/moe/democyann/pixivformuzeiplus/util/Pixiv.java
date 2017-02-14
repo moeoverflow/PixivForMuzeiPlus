@@ -186,8 +186,9 @@ public class Pixiv {
         illust.checkURL();
         Map<String,String> recprer=basepre;
 //        recprer.put("Referer", "http://www.pixiv.net/recommended.php");
-        basepre.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-        restring=illust.getData(basepre);
+        recprer.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+//        recprer.put("Authorization","Bearer "+token);
+        restring=illust.getData(recprer);
         if(restring.equals("ERROR")){
             return null;
         }

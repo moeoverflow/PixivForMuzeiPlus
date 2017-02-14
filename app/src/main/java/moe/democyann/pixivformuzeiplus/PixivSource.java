@@ -348,12 +348,16 @@ public class PixivSource extends RemoteMuzeiArtSource{
             if(list!=null && list.size()!=0){
                 JSONObject data;
                 JSONObject illust;
+                JSONObject r18obj=null;
+                String img_url="";
+                boolean r18_flag=false;
 
                 while(true) {
                     Random random = new Random();
                     int i = random.nextInt(list.size());
                     Log.i(TAG, "pixivUserPush: GET I ======= "+i);
                     String imgid = String.valueOf(list.get(i));
+
                     data = pixiv.getIllInfo(imgid);
                     if (data == null) {
                         flushToken();
@@ -373,19 +377,45 @@ public class PixivSource extends RemoteMuzeiArtSource{
                         Log.i(TAG, "浏览数不足，重新加载"+getViews());
                         continue;
                     }
-
-                    String tags="";
+                    JSONObject imgurls;
                     try{
-                        tags=illust.getString("tags");
-                    }catch (Exception e){
+                        if(illust.getInt("page_count")>1){
+                            imgurls=illust.getJSONArray("meta_pages").getJSONObject(0).getJSONObject("image_urls");
+                            img_url=imgurls.getString("original");
+                        }else {
+                            imgurls = illust.getJSONObject("meta_single_page");
+                            img_url=imgurls.getString("original_image_url");
+                        }
+                    } catch (JSONException e) {
                         Log.e(TAG, e.toString(),e );
                         throw new RetryException();
                     }
 
-                    Log.i(TAG, tags);
-                    if(getIs_no_R18()){
-                        if(TagFliter.is_r18(tags)) continue;
+                    CharSequence c= "limit_r18";
+                    if(img_url.contains(c)){
+                        if(getIs_no_R18()){continue;}
+                        else{
+                            r18_flag=true;
+                            r18obj=pixiv.getIllInfo2(imgid);
+                        }
                     }
+
+                    String tags="";
+                    try {
+                        if(r18_flag) {
+                            tags=r18obj.getString("tags");
+                        }else {
+                            tags = illust.getString("tags");
+                        }
+                    } catch (Exception e) {
+                        Log.e(TAG, e.toString(), e);
+                        throw new RetryException();
+                    }
+
+                    Log.i(TAG, tags);
+//                    if(getIs_no_R18()){
+//                        if(TagFliter.is_r18(tags)) continue;
+//                    }
 
                     if(getIs_check_Tag()){
                         if(!TagFliter.checkTagAll(getTags(),tags)) break;
@@ -401,33 +431,29 @@ public class PixivSource extends RemoteMuzeiArtSource{
                 }
                 String user_id="1";
                 String img_id="1";
-                String img_url="";
+
                 String user_name;
                 String illust_title;
 
                 JSONObject user;
-                JSONObject imgurls;
 //                String tag;
                 try {
-                    user=illust.getJSONObject("user");
-                    if(illust.getInt("page_count")>1){
-                        imgurls=illust.getJSONArray("meta_pages").getJSONObject(0).getJSONObject("image_urls");
-                        img_url=imgurls.getString("original");
-                    }else {
-                        imgurls = illust.getJSONObject("meta_single_page");
-                        img_url=imgurls.getString("original_image_url");
+                    if(r18_flag){
+                        user_id=r18obj.getString("illust_user_id");
+                        img_id=r18obj.getString("illust_id");
+                        img_url=r18obj.getString("url");
+                        user_name=r18obj.getString("user_name");
+                        illust_title=r18obj.getString("illust_title");
+                    } else {
+                        user = illust.getJSONObject("user");
+
+                        user_id = user.getString("id");
+                        img_id = illust.getString("id");
+
+                        user_name = user.getString("name");
+                        illust_title = illust.getString("title");
                     }
-
-                    user_id=user.getString("id");
-                    img_id=illust.getString("id");
-
-                    user_name=user.getString("name");
-                    illust_title=illust.getString("title");
-//                    user_id=o.getString("illust_user_id");
-//                    img_id=o.getString("illust_id");
-//                    img_url=o.getString("url");
-//                    user_name=o.getString("user_name");
-//                    illust_title=o.getString("illust_title");
+//
 //                    tag=o.getString("tags");
                 } catch (JSONException e) {
                     Log.e(TAG, e.toString(),e );
@@ -437,7 +463,13 @@ public class PixivSource extends RemoteMuzeiArtSource{
                 Random r = new Random();
                 int nr = r.nextInt(1000);
                 File file = new File(app.getExternalCacheDir(),user_id+img_id+nr);
-                Uri fileUri =pixiv.downloadImage2(img_url,img_id,file);
+                Uri fileUri;
+                if(r18_flag){
+                    fileUri= pixiv.downloadImage(img_url,img_id,file);
+                }
+                else {
+                    fileUri = pixiv.downloadImage2(img_url, img_id, file);
+                }
                 Artwork artwork = new Artwork.Builder()
                         .title(illust_title)
                         .byline(user_name)
