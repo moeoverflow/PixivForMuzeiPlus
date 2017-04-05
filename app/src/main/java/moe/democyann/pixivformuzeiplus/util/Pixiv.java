@@ -25,8 +25,8 @@ public class Pixiv {
     private String restring;
 
     private final String INDEX_URL = "http://www.pixiv.net";
-    private final String POST_KEY_URL = "https://accounts.pixiv.net/login?lang=zh&source=pc&view_type=page&ref=wwwtop_accounts_index";
-    private final String LOGIN_URL = "https://accounts.pixiv.net/api/login?lang=zh";
+    private final String POST_KEY_URL = "https://accounts.pixiv.net/login&source=pc&view_type=page&ref=wwwtop_accounts_index";
+    private final String LOGIN_URL = "https://accounts.pixiv.net/api/login";
     private final String RECOMM_URL = "http://www.pixiv.net/rpc/recommender.php?type=illust&sample_illusts=auto&num_recommendations=500&tt=";
     private final String ILLUST_URL="http://www.pixiv.net/rpc/illust_list.php?verbosity=&exclude_muted_illusts=1&illust_ids=";
 
