@@ -2,7 +2,6 @@ package moe.democyann.pixivformuzeiplus.util;
 
 import android.util.Log;
 
-
 import com.google.android.apps.muzei.api.RemoteMuzeiArtSource;
 
 import java.io.File;
@@ -19,7 +18,7 @@ import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
 /**
- * Created by Democyann on 2017/1/11.
+ * Created by demo on 3/31/17.
  */
 
 public class HttpUtil {
@@ -57,7 +56,7 @@ public class HttpUtil {
 
             if (status != 200) {
                 Log.w(TAG, "Response code: " + status);
-                throw new RemoteMuzeiArtSource.RetryException();
+                throw new RemoteMuzeiArtSource.RetryException(new Exception("HTTP ERROR "+status));
             }
             Log.d(TAG, "Response code: " + status);
 
@@ -81,8 +80,6 @@ public class HttpUtil {
                 buffer = new char[1024];
                 while ((read = inputStreamReader.read(buffer)) != -1) {
                     restring += String.valueOf(buffer, 0, read);
-//                    Log.i(TAG, "getData: read"+read);
-//                    buffer = new char[1024*10];
                 }
             }finally {
                 try{
@@ -133,17 +130,19 @@ public class HttpUtil {
 
             if (status != 200) {
                 Log.w(TAG, "Response code: " + status);
-                throw new RemoteMuzeiArtSource.RetryException();
+                throw new RemoteMuzeiArtSource.RetryException(new Exception("HTTP ERROR "+status));
             }
             Log.d(TAG, "Response code: " + status);
 
             List<String> set_cookie = conn.getHeaderFields().get("Set-Cookie");
 
-            for (String str : set_cookie) {
-                String ci = str.substring(0, str.indexOf(";"));
-                cookie.add(ci);
+            if(set_cookie!=null) {
+                for (String str : set_cookie) {
+                    String ci = str.substring(0, str.indexOf(";"));
+                    cookie.add(ci);
+                }
             }
-
+            Log.i(TAG, "postData: COOKIE:"+cookie.toString());
 
             try {
                 inputStream = conn.getInputStream();
@@ -228,8 +227,8 @@ public class HttpUtil {
                 }
             }
         } catch (Exception e){
-        Log.e(TAG, e.toString(), e);
-        return false;
+            Log.e(TAG, e.toString(), e);
+            return false;
         }
         return true;
     }

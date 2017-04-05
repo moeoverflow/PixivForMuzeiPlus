@@ -11,6 +11,7 @@
         <item>1天</item>
         <item>3天</item>
     </string-array>
+
     <string-array name="pref_changeInterval_entryValues">
         <!-- unit: 分钟 -->
         <item>0</item>
@@ -23,4 +24,17 @@
         <item>1440</item>
         <item>4320</item>
     </string-array>
+
+    <string-array name="method_string">
+        <item>每日 Top50</item>
+        <item>猜你喜欢 (需登录)</item>
+        <item>收藏夹 (需登录)</item>
+    </string-array>
+
+    <string-array name="method_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 </resources>

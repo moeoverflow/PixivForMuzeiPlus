@@ -4,13 +4,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Democyann on 2017/1/11.
+ * Created by demo on 3/31/17.
  */
 
 public class Cookie {
     private Map<String, String> cookie;
     public Cookie(){
         cookie=new HashMap<String, String>();
+    }
+    public Cookie(String str){
+        cookie=new HashMap<String, String>();
+
+        if(!"".equals(str)){
+            String[] cooarr=str.split(";");
+            for(String c:cooarr){
+                add(c);
+            }
+        }
+
     }
     public boolean add(String key,String value){
         cookie.put(key, value);

@@ -23,4 +23,16 @@
         <item>1440</item>
         <item>4320</item>
     </string-array>
+
+    <string-array name="method_string">
+        <item>デイリー Top50</item>
+        <item>おすすめ (ログイン必須)</item>
+        <item>ブックマーク (ログイン必須)</item>
+    </string-array>
+    <string-array name="method_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 </resources>

@@ -23,4 +23,16 @@
         <item>1440</item>
         <item>4320</item>
     </string-array>
+
+    <string-array name="method_string">
+        <item>Pixiv Daily Top50</item>
+        <item>Recommended For You (Login Required)</item>
+        <item>Your Bookmarks (Login Required)</item>
+    </string-array>
+
+    <string-array name="method_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>

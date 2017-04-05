@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '22.0.1'
+    compileSdkVersion 25
+    buildToolsVersion "24.0.0"
     defaultConfig {
         applicationId "moe.democyann.pixivformuzeiplus"
-        minSdkVersion 14
-        targetSdkVersion 22
-        versionCode 6
-        versionName "1.1.7"
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionCode 7
+        versionName "1.1.8"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -24,9 +24,8 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile files('lib/muzei-api-2.0.jar')
-    compile files('lib/muzei-api-2.0-javadoc.jar')
-    compile 'com.android.support:appcompat-v7:22.2.1'
-    compile 'com.android.support:support-v4:22.2.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
     testCompile 'junit:junit:4.12'
+    compile files('libs/muzei-api-2.0.jar')
+    compile files('libs/muzei-api-2.0-javadoc.jar')
 }

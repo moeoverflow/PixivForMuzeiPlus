@@ -6,12 +6,8 @@
     <string name="change_time">更新时间</string>
     <string name="change_time_li">设置更新图片的时间间隔</string>
     <string name="only_wifi">仅 Wifi 下更新图片</string>
-    <string name="only_wif_li"></string>
-    <string name="pixiv_user">使用 Pixiv 用户推荐算法(需登录)</string>
-    <string name="pixiv_user_li">如关闭则使用 Pixiv 每日精选推送</string>
     <string name="pixiv_login_info">Pixiv 登录信息</string>
     <string name="set_pixiv_id">Pixiv ID</string>
-    <string name="only_pixiv_user">该项仅在使用 Pixiv 用户推荐算法时有效</string>
     <string name="input_pixiv_id">输入你的 PixivID</string>
     <string name="set_pixiv_pass">Pixiv 密码</string>
     <string name="input_pixiv_pass">输入你的 Pixiv 密码</string>
@@ -30,4 +26,6 @@
     <string name="views_set">最低浏览量</string>
     <string name="views_set_li">只显示大于此浏览量的图片，过大可能无法加载</string>
     <string name="views_set_title">最低浏览量(0-50000)</string>
+    <string name="method_default">0</string>
+    <string name="method_title">推荐模式</string>
 </resources>

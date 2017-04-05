@@ -2,17 +2,14 @@
     <string name="app_name">Pixiv for Muzei Plus</string>
     <string name="source_description">Sourcing artworks from Pixiv for Muzei live wallpaper By Democyann</string>
     <string name="time_default">30</string>
+    <string name="method_default">0</string>
 
     <string name="push_set">Push Settings</string>
     <string name="change_time">Change Interval</string>
     <string name="change_time_li">Configure the interval of image changings</string>
     <string name="only_wifi">Changing image under WiFi only</string>
-    <string name="only_wif_li"></string>
-    <string name="pixiv_user">Using Pixiv Algorithm</string>
-    <string name="pixiv_user_li">Login required.\nIf off then using Pixiv daily recommendations</string>
     <string name="pixiv_login_info">Pixiv Login</string>
     <string name="set_pixiv_id">Pixiv ID</string>
-    <string name="only_pixiv_user">Available only when using Pixiv user algorithm</string>
     <string name="input_pixiv_id">Input Your PixivID</string>
     <string name="set_pixiv_pass">Password</string>
     <string name="input_pixiv_pass">Inpur Your Pixiv Password</string>
@@ -31,4 +28,5 @@
     <string name="views_set">Views</string>
     <string name="views_set_li">Set min views</string>
     <string name="views_set_title">min views(0-50000)</string>
+    <string name="method_title">推荐模式</string>
 </resources>

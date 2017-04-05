@@ -6,11 +6,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by Democyann on 2017/1/14.
+ * Created by demo on 3/31/17.
  */
 
 public class TagFliter {
-
     private static final String TAG="TagFilter";
 
     public static boolean is_r18(String str){

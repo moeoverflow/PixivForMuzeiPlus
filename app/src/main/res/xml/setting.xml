@@ -3,25 +3,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <PreferenceCategory
+        android:title="@string/pixiv_login_info">
+        <EditTextPreference
+            android:key="pixivid"
+            android:title="@string/set_pixiv_id"
+            android:dialogTitle="@string/input_pixiv_id"
+            />
+        <EditTextPreference
+            android:key="password"
+            android:inputType="textPassword"
+            android:title="@string/set_pixiv_pass"
+            android:dialogTitle="@string/input_pixiv_pass"
+            />
+    </PreferenceCategory>
+    <PreferenceCategory
         android:title="@string/push_set">
-    <ListPreference
-        android:key="time_change"
-        android:title="@string/change_time"
-        android:summary="@string/change_time_li"
-        android:entries="@array/pref_changeInterval_entries"
-        android:entryValues="@array/pref_changeInterval_entryValues"
-        android:defaultValue="@string/time_default"
-        android:dialogTitle="@string/change_time" />
-    <CheckBoxPreference
-        android:key="only_wifi"
-        android:title="@string/only_wifi"
-        android:summary="@string/only_wif_li"
-        android:defaultValue="true"
-        />
+        <ListPreference
+            android:key="time_change"
+            android:title="@string/change_time"
+            android:summary="@string/change_time_li"
+            android:entries="@array/pref_changeInterval_entries"
+            android:entryValues="@array/pref_changeInterval_entryValues"
+            android:defaultValue="@string/time_default"
+            android:dialogTitle="@string/change_time" />
+        <CheckBoxPreference
+            android:key="only_wifi"
+            android:title="@string/only_wifi"
+            android:defaultValue="true"
+            />
         <CheckBoxPreference
             android:key="is_no_r18"
             android:title="@string/r18_enable"
             android:defaultValue="true"
+            />
+        <ListPreference
+            android:key="method"
+            android:title="@string/method_title"
+            android:entries="@array/method_string"
+            android:entryValues="@array/method_values"
+            android:defaultValue="0"
+            android:dialogTitle="@string/method_title"
+
             />
         <CheckBoxPreference
             android:key="is_tag"
@@ -45,30 +67,12 @@
             android:defaultValue="0"
             />
 
-    <CheckBoxPreference
-        android:key="is_user"
-        android:title="@string/pixiv_user"
-        android:summary="@string/pixiv_user_li"
-        android:defaultValue="false"
-        />
-        </PreferenceCategory>
-    <PreferenceCategory
-        android:title="@string/pixiv_login_info">
-    <EditTextPreference
-        android:key="pixivid"
-        android:title="@string/set_pixiv_id"
-        android:summary="@string/only_pixiv_user"
-        android:dialogTitle="@string/input_pixiv_id"
-        android:dependency="is_user"
-        />
-    <EditTextPreference
-        android:key="password"
-        android:inputType="textPassword"
-        android:title="@string/set_pixiv_pass"
-        android:summary="@string/only_pixiv_user"
-        android:dialogTitle="@string/input_pixiv_pass"
-        android:dependency="is_user"
-        />
+        <!--<CheckBoxPreference-->
+            <!--android:key="is_user"-->
+            <!--android:title="@string/pixiv_user"-->
+            <!--android:summary="@string/pixiv_user_li"-->
+            <!--android:defaultValue="false"-->
+            <!--/>-->
     </PreferenceCategory>
     <PreferenceCategory
         android:title="About">
@@ -83,6 +87,16 @@
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://democyann.moe/2017/01/343/" />
+        </Preference>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Translator">
+        <Preference
+            android:title="日本語"
+            android:summary="Twitter:琉千歌_Luccica">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://twitter.com/Stella_Luccica" />
         </Preference>
     </PreferenceCategory>
 </PreferenceScreen>
