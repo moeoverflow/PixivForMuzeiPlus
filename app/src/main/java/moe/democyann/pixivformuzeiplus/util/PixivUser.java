@@ -99,6 +99,7 @@ public class PixivUser {
                 db.setInfo("cookie",pixiv.getCookie());
                 db.setInfo("username",conf.getUsername());
                 db.setInfo("commList","");
+                db.setInfo("userid",pixiv.getUserid());
             }else{
                 error=pixiv.getError();
 

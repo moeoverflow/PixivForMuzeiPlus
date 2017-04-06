@@ -28,5 +28,6 @@
     <string name="views_set">Views</string>
     <string name="views_set_li">Set min views</string>
     <string name="views_set_title">min views(0-50000)</string>
-    <string name="method_title">推荐模式</string>
+    <string name="method_title">Push Mode</string>
+    <string name="we">The Applection is Muzei Wallpaper Source,Plese install Muzei Live Wallpaper</string>
 </resources>
