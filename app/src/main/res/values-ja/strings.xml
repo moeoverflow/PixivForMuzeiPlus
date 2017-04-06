@@ -26,5 +26,5 @@
     <string name="views_set_title">閲覧数の最低限(0-50000)</string>
     <string name="method_default">0</string>
     <string name="method_title">おまかせモード</string>
-    <string name="we">このアプリはMuzei Live Wallpaperのソースです、Muzeiインストール必須です</string>
+    <string name="we">このアプリはMuzei live wallpaperのソースとしてインストールされます。ご利用いただけるにはMuzeiをインストールしてください。</string>
 </resources>
