@@ -25,15 +25,15 @@ public class Pixiv {
     private static String userid;
     private String restring;
 
-    private final String INDEX_URL = "http://www.pixiv.net";
+    private final String INDEX_URL = "https://www.pixiv.net";
     private final String POST_KEY_URL = "https://accounts.pixiv.net/login?lang=zh&source=pc&view_type=page&ref=wwwtop_accounts_index";
     private final String LOGIN_URL = "https://accounts.pixiv.net/api/login?lang=zh";
-    private final String RECOMM_URL = "http://www.pixiv.net/rpc/recommender.php?type=illust&sample_illusts=auto&num_recommendations=500&tt=";
-    private final String ILLUST_URL="http://www.pixiv.net/rpc/illust_list.php?verbosity=&exclude_muted_illusts=1&illust_ids=";
+    private final String RECOMM_URL = "https://www.pixiv.net/rpc/recommender.php?type=illust&sample_illusts=auto&num_recommendations=500&tt=";
+    private final String ILLUST_URL="https://www.pixiv.net/rpc/illust_list.php?verbosity=&exclude_muted_illusts=1&illust_ids=";
 
     private final String DETA_URL="https://app-api.pixiv.net/v1/illust/detail?illust_id=";
 
-    private final String RALL_URL="http://www.pixiv.net/ranking.php?mode=daily&content=illust&p=1&format=json";
+    private final String RALL_URL="https://www.pixiv.net/ranking.php?mode=daily&content=illust&p=1&format=json";
 
     private final String BOOK_URL="https://app-api.pixiv.net/v1/user/bookmarks/illust?restrict=public&user_id=";
 
@@ -499,7 +499,7 @@ public class Pixiv {
      */
     public Uri downloadImage(String imgurl, String workid, File file,boolean x){
         String smail=imgurl;
-        String ref="http://www.pixiv.net/member_illust.php?mode=medium&illust_id=" + workid;
+        String ref="https://www.pixiv.net/member_illust.php?mode=medium&illust_id=" + workid;
 
 
         String big=smail;

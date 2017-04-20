@@ -54,8 +54,9 @@ public class HttpUtil {
 
             int status = conn.getResponseCode();
 
-            if (status != 200) {
+           if (status != 200) {
                 Log.w(TAG, "Response code: " + status);
+                Log.i(TAG, "getData: "+conn.getHeaderField("location"));
                 throw new RemoteMuzeiArtSource.RetryException(new Exception("HTTP ERROR "+status));
             }
             Log.d(TAG, "Response code: " + status);
