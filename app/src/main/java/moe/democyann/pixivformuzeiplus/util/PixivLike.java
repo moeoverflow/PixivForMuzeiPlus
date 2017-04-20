@@ -17,6 +17,7 @@ import moe.democyann.pixivformuzeiplus.dbUtil.DbUtil;
 
 /**
  * Created by demo on 4/3/17.
+ * pixiv 收藏夹作品获取类
  */
 
 public class PixivLike {
@@ -152,16 +153,17 @@ public class PixivLike {
 
         ImgInfo info;
         Random r = new Random();
-        int i = r.nextInt(list.size());
+        while(true) {
+            int i = r.nextInt(list.size());
 
-        info = pixiv.getIllInfo(String.valueOf(list.get(i)));
+            info = pixiv.getIllInfo(String.valueOf(list.get(i)));
 
-        //信息获取失败直接返回
-        if(info==null){
-            error=pixiv.getError();
-            db.setInfo("likeList","");
-            throw new RemoteMuzeiArtSource.RetryException();
-        }
+            //信息获取失败直接返回
+            if (info == null) {
+                error = pixiv.getError();
+                db.setInfo("likeList", "");
+                throw new RemoteMuzeiArtSource.RetryException();
+            }
 
 //            if(conf.getIs_check_Tag()){
 //                if(TagFliter.checkTagAll(conf.getTage(),info.getTags())){
@@ -173,13 +175,15 @@ public class PixivLike {
 //                continue;
 //            }
 //
-//            if(conf.getIs_no_R18() && info.isR18()){
-//                continue;
-//            }
+            if(conf.getIs_no_R18() && info.isR18()){
+                continue;
+            }
 
+            break;
+        }
 
-        Random ra = new Random();
-        int rn = ra.nextInt(1000);
+//        Random ra = new Random();
+        int rn = r.nextInt(1000);
         File file = new File(dir,info.getUser_id()+info.getImg_id()+rn);
         Uri uri=pixiv.downloadImage(info.getImg_url(),info.getImg_id(),file,true);
         Uri f = FileProvider.getUriForFile(context, "moe.democyann.pixivformuzeiplus.fileprovider", file);

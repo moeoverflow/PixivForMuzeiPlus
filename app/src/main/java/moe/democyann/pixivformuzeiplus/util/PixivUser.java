@@ -18,6 +18,7 @@ import moe.democyann.pixivformuzeiplus.dbUtil.DbUtil;
 
 /**
  * Created by demo on 4/3/17.
+ * Pixiv 为你推荐 作品获取类
  */
 
 public class PixivUser {
@@ -146,8 +147,9 @@ public class PixivUser {
         }
 
         ImgInfo info;
+        Random r = new Random();
         while(true){
-            Random r = new Random();
+
             int i = r.nextInt(list.size());
 
             info = pixiv.getIllInfo(String.valueOf(list.get(i)));
@@ -176,8 +178,9 @@ public class PixivUser {
             break;
         }
 
-        Random ra = new Random();
-        int rn = ra.nextInt(1000);
+//        Random ra = new Random();
+
+        int rn = r.nextInt(1000);
         File file = new File(dir,info.getUser_id()+info.getImg_id()+rn);
         Uri uri=pixiv.downloadImage(info.getImg_url(),info.getImg_id(),file,true);
         Uri f = FileProvider.getUriForFile(context, "moe.democyann.pixivformuzeiplus.fileprovider", file);

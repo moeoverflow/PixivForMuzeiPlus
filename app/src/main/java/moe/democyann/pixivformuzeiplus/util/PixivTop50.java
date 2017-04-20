@@ -25,6 +25,7 @@ import moe.democyann.pixivformuzeiplus.dbUtil.DbUtil;
 
 /**
  * Created by demo on 4/3/17.
+ * Pixiv 每日Top 50 作品获取类
  */
 
 public class PixivTop50 {
@@ -97,8 +98,8 @@ public class PixivTop50 {
             String illust_title;
             String tags = "";
 
+            Random r= new Random();
             while(true){
-                Random r= new Random();
                 int i=r.nextInt(rall.length());
 
                 try {
@@ -115,9 +116,6 @@ public class PixivTop50 {
                     throw new RemoteMuzeiArtSource.RetryException();
                 }
 
-//                if(!TagFliter.checkTagAll(conf.getTage(),tags)){
-//                    break;
-//                }
                 if(conf.getIs_check_Tag()){
                     if(TagFliter.checkTagAll(conf.getTage(),tags)){
                         continue;
@@ -128,8 +126,8 @@ public class PixivTop50 {
             }
 
 
-            Random ra = new Random();
-            int rn=ra.nextInt(1000);
+//            Random ra = new Random();
+            int rn=r.nextInt(1000);
             File file = new File(dir,user_id+img_id+rn);
             Uri fileUri=pixiv.downloadImage(img_url,img_id,file,true);
 //            if(!mess.equals("")) user_name=mess;

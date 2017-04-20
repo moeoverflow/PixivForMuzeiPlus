@@ -389,7 +389,7 @@ public class Pixiv {
 
     /***
      * 获取作品信息方式
-     * @param id 作品IsD
+     * @param id 作品ID
      * @return
      */
     public ImgInfo getIllInfo(String id){

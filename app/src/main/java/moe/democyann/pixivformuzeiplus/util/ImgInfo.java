@@ -13,8 +13,17 @@ public class ImgInfo {
     private String user_name="";//作者名称
     private String tags="";     //图像标签
     private boolean r18=false;  //R18标志
+    private double px=0.5;      //图片宽高比
 
     private int view=0;         //浏览数量
+
+    public double getPx() {
+        return px;
+    }
+
+    public void setPx(double px) {
+        this.px = px;
+    }
 
     public String getImg_url() {
         return img_url;

@@ -67,12 +67,12 @@
             android:defaultValue="0"
             />
 
-        <!--<CheckBoxPreference-->
-            <!--android:key="is_user"-->
-            <!--android:title="@string/pixiv_user"-->
-            <!--android:summary="@string/pixiv_user_li"-->
-            <!--android:defaultValue="false"-->
-            <!--/>-->
+        <CheckBoxPreference
+            android:key="is_autopx"
+            android:title="按屏幕大小适配图片(beta)"
+            android:summary="将自动过滤不符合屏幕宽高比的图片"
+            android:defaultValue="false"
+            />
     </PreferenceCategory>
     <PreferenceCategory
         android:title="About">

@@ -100,6 +100,11 @@ public class ConfigManger {
                 v = preferences.getBoolean("is_tag", defaultValue);
         return v;
     }
+    public boolean getIs_autopx() {
+        boolean defaultValue = false,
+                v = preferences.getBoolean("is_autopx", defaultValue);
+        return v;
+    }
 
 
     public String listToString(List list) {
