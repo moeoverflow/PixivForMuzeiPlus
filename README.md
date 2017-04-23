@@ -14,6 +14,9 @@ This is a Muzei Live Wallpaper's Source.
 6.You can configure min views  
 7. Auto preloading  
 
+### Download
+[![Get it on Google Play](https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=moe.democyann.pixivformuzeiplus&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1)
+
 ### Language
 
 1.中文（简体）  
