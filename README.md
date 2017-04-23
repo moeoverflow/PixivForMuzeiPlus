@@ -2,6 +2,8 @@
 
 This is a Muzei Live Wallpaper's Source.
 
+![i1](http://image.coolapk.com/apk_image/2017/0406/E5AEA3E4BCA0E59BBE1-for-127776-o_1bd1pjh358p310n91sen1d0llcs10-uid-776252.jpg)
+
 ----------
 
 1.You can configure the interval of image changings.  
