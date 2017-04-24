@@ -505,13 +505,14 @@ public class Pixiv {
         String big=smail;
 
         if(x) {
-            pattern = Pattern.compile("^(https?://.+?/c/)[0-9]+x[0-9]+(/img-master.+)$");
+            pattern = Pattern.compile("/c/[0-9]+x[0-9]+/img-master");
             matcher = pattern.matcher(imgurl);
-            if (matcher.find()) {
-                big = matcher.group(1) + "1200x1200" + matcher.group(2);
+            if(matcher.find()) {
+                big = matcher.replaceFirst("/img-master");
             }
         }
 
+        Log.i(TAG, "downloadImage: "+big);
         HttpUtil download = new HttpUtil(big,null);
         download.checkURL();
 
