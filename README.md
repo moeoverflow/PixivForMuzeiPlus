@@ -25,7 +25,7 @@ This is a Muzei Live Wallpaper's Source.
 
 ### License
 
-GPL v3
+BSD
 
 ### Thanks
 
