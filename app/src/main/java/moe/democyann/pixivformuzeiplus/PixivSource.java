@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.Locale;
 
 import moe.democyann.pixivformuzeiplus.dbUtil.DbUtil;
 import moe.democyann.pixivformuzeiplus.util.ConfigManger;
@@ -156,6 +157,14 @@ public class PixivSource extends RemoteMuzeiArtSource {
         if(!isEnabledWifi() && conf.isOnlyUpdateOnWifi()){
             scheduleUpdate();
             return;
+        }
+
+        String [] arr = {"KP","PRK","408","KR","KOR","410","ko","kor"};
+        String ct=Locale.getDefault().getCountry();
+        String lg=Locale.getDefault().getLanguage();
+        for(String te:arr){
+            if(ct.equals(te) || lg.equals(te))
+                return;
         }
 
         Artwork last=getCurrentArtwork();
