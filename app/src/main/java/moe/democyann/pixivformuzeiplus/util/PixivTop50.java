@@ -41,6 +41,7 @@ public class PixivTop50 {
 
     private static final int MINUTE=1000*60;
     private String error="";
+    private int cont=0;
 
     public String getError() {
         return error;
@@ -99,6 +100,7 @@ public class PixivTop50 {
             String tags = "";
 
             Random r= new Random();
+            cont=0;
             while(true){
                 int i=r.nextInt(rall.length());
 
@@ -116,8 +118,13 @@ public class PixivTop50 {
                     throw new RemoteMuzeiArtSource.RetryException();
                 }
 
+                if(cont>=5){
+                    break;
+                }
+
                 if(conf.getIs_check_Tag()){
                     if(TagFliter.checkTagAll(conf.getTage(),tags)){
+                        cont++;
                         continue;
                     }
                 }
@@ -131,7 +138,10 @@ public class PixivTop50 {
             File file = new File(dir,user_id+img_id+rn);
             Uri fileUri=pixiv.downloadImage(img_url,img_id,file,true);
 //            if(!mess.equals("")) user_name=mess;
-
+            if(fileUri==null){
+                error="2001";
+                throw new RemoteMuzeiArtSource.RetryException();
+            }
             Uri f = FileProvider.getUriForFile(context, "moe.democyann.pixivformuzeiplus.fileprovider", file);
 //            context.grantUriPermission("net.nurik.roman.muzei", f, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
 

@@ -403,6 +403,8 @@ public class Pixiv {
         String user_name="";//作者名称
         String tags="";     //图像标签
         boolean r18=false;  //R18标志
+        int img_width=0;
+        int img_height=0;
 
         int view=0;         //浏览数量
 
@@ -430,6 +432,8 @@ public class Pixiv {
                 imgurls = ill.getJSONObject("meta_single_page");
                 img_url=imgurls.getString("original_image_url");
             }
+            img_width=ill.getInt("width");
+            img_height=ill.getInt("height");
 
             CharSequence c= "limit_r18";
 
@@ -484,6 +488,8 @@ public class Pixiv {
         o.setR18(r18);
         o.setTags(tags);
         o.setView(view);
+        o.setPx((img_width*1.00)/img_height);
+        Log.i(TAG, "getIllInfo: IMGPX"+img_width+" * "+img_height);
 
         return o;
     }

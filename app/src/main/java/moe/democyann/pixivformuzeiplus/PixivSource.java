@@ -15,6 +15,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Locale;
 
 import moe.democyann.pixivformuzeiplus.dbUtil.DbUtil;
@@ -49,6 +52,8 @@ public class PixivSource extends RemoteMuzeiArtSource {
     private static ConfigManger conf;      //设置管理器
     private DbUtil db;                     //数据库辅助类
 
+
+    private int cont=0;
 
     private Runnable runnable = new Runnable() {
         @Override
@@ -116,7 +121,8 @@ public class PixivSource extends RemoteMuzeiArtSource {
                 if(!"".equals(error)){
                     if(error.equals("1100")) error=getString(R.string.u_err);
                     if(error.equals("1005")) error=getString(R.string.login_failed);
-
+                    if(error.equals("2001")) error="请授予存储权限。";
+                    cont++;
                     Artwork t= PixivSource.this.getCurrentArtwork();
                     Artwork p = new Artwork.Builder()
                             .title(t.getTitle())
@@ -127,6 +133,8 @@ public class PixivSource extends RemoteMuzeiArtSource {
                             .build();
                     publishArtwork(p);
                     break;
+                }else {
+                    cont=0;
                 }
                 if (i > 5) break;
             }
@@ -154,9 +162,14 @@ public class PixivSource extends RemoteMuzeiArtSource {
     @Override
     protected void onTryUpdate(int i) throws RetryException {
 
+        Log.i(TAG, "onTryUpdate: info:"+i);
+
         if(!isEnabledWifi() && conf.isOnlyUpdateOnWifi()){
             scheduleUpdate();
             return;
+        }
+        if(cont>=5){
+            scheduleUpdate(0);
         }
 
         String [] arr = {"KP","PRK","408","KR","KOR","410","ko","kor"};
@@ -195,14 +208,21 @@ public class PixivSource extends RemoteMuzeiArtSource {
         }
 
         //未找到文件则2秒后重新获取下一张图片
-        if(artwork!=null) {
-            File test = new File(getDir(), artwork.getToken());
-            if (!test.exists()) {
-                scheduleUpdate(System.currentTimeMillis() + 2 * 1000);
+        if(cont<5) {
+            if (artwork != null) {
+                File test = new File(getDir(), artwork.getToken());
+                if (!test.exists()) {
+                    scheduleUpdate(System.currentTimeMillis() + 2 * 1000);
+                    cont++;
+                    return;
+                }
+            } else {
+                scheduleUpdate(System.currentTimeMillis() + 5 * 1000);
+                cont++;
                 return;
             }
         }else{
-            scheduleUpdate(System.currentTimeMillis() + 5 * 1000);
+            scheduleUpdate(0);
             return;
         }
 
@@ -246,6 +266,7 @@ public class PixivSource extends RemoteMuzeiArtSource {
         NetworkInfo wifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         return wifi.isConnected();
     }
+
 
     /***
      * 设置默认更新时间

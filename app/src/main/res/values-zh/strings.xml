@@ -29,4 +29,11 @@
     <string name="method_default">0</string>
     <string name="method_title">推荐模式</string>
     <string name="we">这个 APP 是 Muzei Live Wallpaper 的壁纸源，不能单独运行，请先安装 Muzei 并在 Muzei 的 Source 设置界面选择启动即可。</string>
+
+    <string name="permission">请允许 Muzei 和 app 使用存储权限</string>
+    <string name="hideico">隐藏图标</string>
+    <string name="showico">显示图标</string>
+    <string name="autopx_set">按屏幕大小适配图片(beta)</string>
+    <string name="autopx_set_li">将自动过滤不符合屏幕宽高比的图片</string>
+    <string name="iconswitch">切换图标显示状态</string>
 </resources>

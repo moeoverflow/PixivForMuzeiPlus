@@ -1,18 +1,12 @@
 package moe.democyann.pixivformuzeiplus.activity;
 
-import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ButtonBarLayout;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
 import java.util.Locale;
 
 import moe.democyann.pixivformuzeiplus.R;
@@ -59,6 +53,5 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
-
     }
 }

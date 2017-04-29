@@ -4,11 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import moe.democyann.pixivformuzeiplus.PixivSource;
 import moe.democyann.pixivformuzeiplus.R;
 
 /**
@@ -106,6 +109,19 @@ public class ConfigManger {
         return v;
     }
 
+    public boolean get_icon(){
+        boolean defaultValue = true,
+                v = preferences.getBoolean("icon", defaultValue);
+        return v;
+    }
+
+    public void set_icon(boolean v){
+        SharedPreferences.Editor edit = preferences.edit();
+        edit.putBoolean("icon",v);
+        edit.commit();
+    }
+
+
 
     public String listToString(List list) {
         StringBuilder sb = new StringBuilder();
@@ -124,5 +140,13 @@ public class ConfigManger {
             }
         }
         return list;
+    }
+
+    public double getPx(){
+        DisplayMetrics dm =context.getResources().getDisplayMetrics();
+        int w_screen = dm.widthPixels;
+        int h_screen = dm.heightPixels;
+        Log.i(TAG, "getPx: "+w_screen+" * " + h_screen);
+        return (w_screen*1.00)/h_screen;
     }
 }

@@ -30,4 +30,12 @@
     <string name="views_set_title">min views(0-50000)</string>
     <string name="method_title">Push Mode</string>
     <string name="we">The application is Muzei Wallpaper Source,Plese install Muzei Live Wallpaper</string>
+    <string name="permission">Please allow storage permissions</string>
+    <string name="showico">Show icon</string>
+    <string name="hideico">Hide icon</string>
+    <string name="autopx_set">Adapt the image by screen size</string>
+    <string name="autopx_set_li">Will automatically filter images that do not meet the screen size</string>
+    <string name="iconswitch">Toggles the icon display</string>
+
+
 </resources>

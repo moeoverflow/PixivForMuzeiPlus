@@ -35,6 +35,7 @@ public class PixivLike {
     private static String token="";  //登录Token
     private static Cookie cookie;  //登录Cookie
     private static String userid="";
+    private int cont=0;
 
 
     private String error="";
@@ -174,8 +175,26 @@ public class PixivLike {
 //            if(conf.getView()>info.getView()){
 //                continue;
 //            }
+
+            if(cont>=5){
+                break;
+            }
+
+            if(list.size()>50 && conf.getIs_autopx()){
+                Log.i(TAG, "getArtwork: =========PX=======");
+                Log.i(TAG, "getArtwork: D:"+conf.getPx());
+                Log.i(TAG, "getArtwork: I:"+info.getPx());
+                double max=conf.getPx()+0.4;
+                double min=conf.getPx()-0.1;
+                if(info.getPx()>max || info.getPx()<min){
+                    Log.i(TAG, "getArtwork: PX retry");
+                    cont++;
+                    continue;
+                }
+            }
 //
             if(conf.getIs_no_R18() && info.isR18()){
+                cont++;
                 continue;
             }
 
@@ -186,6 +205,10 @@ public class PixivLike {
         int rn = r.nextInt(1000);
         File file = new File(dir,info.getUser_id()+info.getImg_id()+rn);
         Uri uri=pixiv.downloadImage(info.getImg_url(),info.getImg_id(),file,true);
+        if(uri==null){
+            error="2001";
+            throw new RemoteMuzeiArtSource.RetryException();
+        }
         Uri f = FileProvider.getUriForFile(context, "moe.democyann.pixivformuzeiplus.fileprovider", file);
         artwork= new Artwork.Builder()
                 .title(info.getImg_name())

@@ -69,10 +69,17 @@
 
         <CheckBoxPreference
             android:key="is_autopx"
-            android:title="按屏幕大小适配图片(beta)"
-            android:summary="将自动过滤不符合屏幕宽高比的图片"
+            android:title="@string/autopx_set"
+            android:summary="@string/autopx_set_li"
             android:defaultValue="false"
             />
+        <Preference
+            android:title="@string/iconswitch">
+            <intent
+                android:action="moe.democyann.pixivformuzeiplus.activity.IcoActivity"
+                android:targetClass="moe.democyann.pixivformuzeiplus.activity.IcoActivity"
+                android:targetPackage="moe.democyann.pixivformuzeiplus"  />
+        </Preference>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="About">
