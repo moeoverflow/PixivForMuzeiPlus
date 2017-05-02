@@ -27,4 +27,12 @@
     <string name="method_default">0</string>
     <string name="method_title">おまかせモード</string>
     <string name="we">このアプリはMuzei live wallpaperのソースとしてインストールされます。ご利用いただけるにはMuzeiをインストールしてください。</string>
+
+    <string name="permission">Muzeiや本アプリのストレージ権限を許可してください。</string>
+    <string name="hideico">アプリアイコンを非表示</string>
+    <string name="showico">アプリアイコンを表示</string>
+    <string name="autopx_set">画面サイズに合わせて画像をロードします（ベータ機能）</string>
+    <string name="autopx_set_li">画面アスペクト比に適応しない画像を自動的にろ過します。</string>
+    <string name="iconswitch">アプリアイコンの表示・非表示を切り替えます。</string>
+
 </resources>

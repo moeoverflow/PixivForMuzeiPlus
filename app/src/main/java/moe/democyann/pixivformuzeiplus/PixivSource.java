@@ -54,6 +54,7 @@ public class PixivSource extends RemoteMuzeiArtSource {
 
 
     private int cont=0;
+    private long lasttime=0;
 
     private Runnable runnable = new Runnable() {
         @Override
@@ -121,7 +122,7 @@ public class PixivSource extends RemoteMuzeiArtSource {
                 if(!"".equals(error)){
                     if(error.equals("1100")) error=getString(R.string.u_err);
                     if(error.equals("1005")) error=getString(R.string.login_failed);
-                    if(error.equals("2001")) error="请授予存储权限。";
+                    if(error.equals("2001")) error=getString(R.string.permission);
                     cont++;
                     Artwork t= PixivSource.this.getCurrentArtwork();
                     Artwork p = new Artwork.Builder()
@@ -161,6 +162,13 @@ public class PixivSource extends RemoteMuzeiArtSource {
 
     @Override
     protected void onTryUpdate(int i) throws RetryException {
+
+        if(System.currentTimeMillis()-lasttime<1000){
+            scheduleUpdate();
+            return;
+        }
+
+        lasttime=System.currentTimeMillis();
 
         Log.i(TAG, "onTryUpdate: info:"+i);
 
