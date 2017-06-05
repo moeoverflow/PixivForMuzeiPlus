@@ -110,7 +110,7 @@ public class PixivTop50 {
                     img_id = o.getString("illust_id");
                     img_url = o.getString("url");
                     user_name = o.getString("user_name");
-                    illust_title = o.getString("title");
+                    illust_title = "TOP "+(i+1)+"\n"+o.getString("title");
                     tags = o.getString("tags");
                 } catch (JSONException e) {
                     Log.e(TAG, e.toString(), e);
