@@ -163,20 +163,27 @@ public class PixivSource extends RemoteMuzeiArtSource {
     @Override
     protected void onTryUpdate(int i) throws RetryException {
 
+        Log.i(TAG, "onTryUpdate: ===== info:"+i);
+
         if(System.currentTimeMillis()-lasttime<1000){
             scheduleUpdate();
             return;
         }
 
-        lasttime=System.currentTimeMillis();
 
-        Log.i(TAG, "onTryUpdate: info:"+i);
+        if(i==3 && conf.getChangeInterval()==0){
+            scheduleUpdate(0);
+            Log.i(TAG, "onTryUpdate: STOP Update");
+            return;
+        }
+
+        lasttime=System.currentTimeMillis();
 
         if(!isEnabledWifi() && conf.isOnlyUpdateOnWifi()){
             scheduleUpdate();
             return;
         }
-        if(cont>=5){
+        if(cont>=6){
             scheduleUpdate(0);
         }
 
@@ -216,10 +223,11 @@ public class PixivSource extends RemoteMuzeiArtSource {
         }
 
         //未找到文件则2秒后重新获取下一张图片
-        if(cont<5) {
+        if(cont<6) {
             if (artwork != null) {
                 File test = new File(getDir(), artwork.getToken());
                 if (!test.exists()) {
+                    Log.i(TAG, "onTryUpdate: No Find File");
                     scheduleUpdate(System.currentTimeMillis() + 2 * 1000);
                     cont++;
                     return;
@@ -234,6 +242,7 @@ public class PixivSource extends RemoteMuzeiArtSource {
             return;
         }
 
+        Log.i(TAG, "onTryUpdate: AWRK URI:"+artwork.getImageUri().toString());
         //分享文件前进行授权
         grantUriPermission("net.nurik.roman.muzei", artwork.getImageUri(), Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
@@ -241,7 +250,7 @@ public class PixivSource extends RemoteMuzeiArtSource {
         publishArtwork(artwork);
 
         //清理无用缓存
-        if(artwork!=last){
+        if(!artwork.equals(last)){
             try {
                 File f= new File(getDir(),last.getToken());
                 f.delete();

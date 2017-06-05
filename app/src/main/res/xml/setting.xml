@@ -85,7 +85,7 @@
         android:title="About">
     <ListPreference
         android:title="Version"
-        android:summary="V1.2.0"
+        android:summary="V1.2.1"
         android:enabled="false"
         android:layout_height="wrap_content" />
         <Preference

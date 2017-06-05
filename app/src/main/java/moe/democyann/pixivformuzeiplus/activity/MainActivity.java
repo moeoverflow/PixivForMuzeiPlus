@@ -2,6 +2,7 @@ package moe.democyann.pixivformuzeiplus.activity;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,10 +31,16 @@ public class MainActivity extends AppCompatActivity {
         open_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PackageManager packageManager = MainActivity.this.getPackageManager();
-                Intent intent;
-                intent =packageManager.getLaunchIntentForPackage("net.nurik.roman.muzei");
-                startActivity(intent);
+                try {
+                    PackageManager packageManager = MainActivity.this.getPackageManager();
+                    Intent intent;
+                    intent =packageManager.getLaunchIntentForPackage("net.nurik.roman.muzei");
+                        startActivity(intent);
+                }catch (Exception e){
+                    Uri uri = Uri.parse("market://details?id=net.nurik.roman.muzei");
+                    Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(goToMarket);
+                }
             }
         });
         setting_btn.setOnClickListener(new View.OnClickListener() {

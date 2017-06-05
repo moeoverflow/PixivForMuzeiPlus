@@ -183,7 +183,7 @@ public class PixivUser {
                 Log.i(TAG, "getArtwork: =========PX=======");
                 Log.i(TAG, "getArtwork: D:"+conf.getPx());
                 Log.i(TAG, "getArtwork: I:"+info.getPx());
-                double max=conf.getPx()+0.4;
+                double max=conf.getPx()+0.2;
                 double min=conf.getPx()-0.1;
                 if(info.getPx()>max || info.getPx()<min){
                     Log.i(TAG, "getArtwork: PX retry");
